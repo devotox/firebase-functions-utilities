@@ -21,11 +21,9 @@ before_install:
 - npm --version
 - npm install -g greenkeeper-lockfile@1
 - npm install -g codecov
-- npm install -g sidekick
 install:
 - npm install
 script:
-- sidekick run --ci
 - npm run test
 - codecov
 before_script: greenkeeper-lockfile-update
