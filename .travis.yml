@@ -4,7 +4,7 @@ node_js:
 sudo: false
 dist: trusty
 env:
-  - CXX=g++-4.8
+- CXX=g++-4.8
 addons:
   apt:
     sources:
@@ -39,3 +39,6 @@ notifications:
     on_start: always
     on_cancel: always
     on_error: always
+  slack:
+    rooms:
+      secure: iyQhvcvB44R9i/uhlGwDNr0uADqAjKXgP9RzJf6XXik8JdUvCkt4cLVsebAMRY+n5+ePkLZcRD59aCRKy+bpSjqzAHZj9xSV/Q6mmrG65augU+RGFKJRzP+uY81DQ/JfWyC1wp5CSglJxHnUXVJM0LaoPSovnIkCBAD0GyujEYrSin+rZNLbq+wIYxPZfBKSrJroAKf/AXf2cJZrFX1Z5H4aLobJ1UB5flQVv774W5SG0nrsic4JlnRp0jHE2UmohKK43Hg9YKqhPPlsGVodBv2LFYUDzYL5J4Ye+FZSnvZVaHbrj3X9hpnb+upvpbML1hI7ug0BAmtUGhRuZOGb2bHhhHE07X2sApDoiN1+9Q6vU0sqouY4fF95f1bvTbeqbOrg50G8r9LcA8xQgPukvxgYXUj23iqi85k7vO9NVhje4CSSSlIykT9oqZk6svYCToeDX0Qy0resmO/vtACBmPHaU28GaU8pNcVbCRAoOFTaN8F0W2rm12kq4D8m22Vi9bTePA7YN5ZySLeH+jCz45TnGm1KHxSe0CaNjo8A+83jaijC8Yhg99JRNsJvGC55yxbE7fT3rn4aH0NVUy0zxzx8o5AowphATc+ZXJdqm/wPKF6AZIBvv8k0rs5v8lNVlN40HXh7+IOP9okmeN4e89AMjSOatVxF+FOoSLCpp8I=
