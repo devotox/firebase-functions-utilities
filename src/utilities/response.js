@@ -56,11 +56,21 @@ export function createRequestConfig(data = {}, url = '') {
 	}, data.config);
 }
 
+
+export function normalizeURLToProxy(req, data) {
+	return data.url
+		|| req.path
+			.replace(/^\//, '')
+			.replace('://', ':/')
+			.replace(':/', '://');
+}
+
 export default {
 	throwError,
 	sendResponse,
 	pipeResponse,
 	errorResponse,
 	getRequestData,
-	createRequestConfig
+	createRequestConfig,
+	normalizeURLToProxy
 }

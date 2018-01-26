@@ -6,11 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
-exports.default = setup;
-
-var _fs = require('fs');
-
-var _fs2 = _interopRequireDefault(_fs);
+exports.default = ssr;
 
 var _cors = require('cors');
 
@@ -34,7 +30,7 @@ var _logger2 = _interopRequireDefault(_logger);
 
 var _firebaseFunctions = require('firebase-functions');
 
-var _firebaseFunctions2 = _interopRequireDefault(_firebaseFunctions);
+var _fs = require('fs');
 
 var _response = require('../utilities/response');
 
@@ -76,7 +72,7 @@ var initializeApplication = function initializeApplication(fastBoot, ampFile) {
 	app.use((0, _compression2.default)());
 	app.use((0, _cors2.default)({ origin: true }));
 
-	app.all('*', function (request, response) {
+	app.get('*', function (request, response) {
 		var url = request.url,
 		    path = request.path;
 
@@ -97,9 +93,8 @@ var initializeApplication = function initializeApplication(fastBoot, ampFile) {
 	return app;
 };
 
-var initializeFastboot = function initializeFastboot() {
-	var distPath = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : './dist';
-
+var initializeFastBoot = function initializeFastBoot() {
+	var distPath = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : process.cwd() + '/dist';
 
 	var fastBoot = new _fastboot2.default({
 		distPath: distPath,
@@ -108,17 +103,17 @@ var initializeFastboot = function initializeFastboot() {
 		destroyAppInstanceInMs: '60000'
 	});
 
-	var ampFile = _fs2.default.readFileSync('.' + distPath + '/index.amp.html', 'utf8');
+	var ampFile = (0, _fs.existsSync)('.' + distPath + '/index.amp.html') && (0, _fs.readFileSync)('.' + distPath + '/index.amp.html', 'utf8');
 
 	return { fastBoot: fastBoot, ampFile: ampFile };
 };
 
-function setup(distPath) {
-	var _initializeFastboot = initializeFastboot(distPath),
-	    fastBoot = _initializeFastboot.fastBoot,
-	    ampFile = _initializeFastboot.ampFile;
+function ssr(distPath) {
+	var _initializeFastBoot = initializeFastBoot(distPath),
+	    fastBoot = _initializeFastBoot.fastBoot,
+	    ampFile = _initializeFastBoot.ampFile;
 
 	var app = initializeApplication(fastBoot, ampFile);
 
-	return _firebaseFunctions2.default.https.onRequest(app);
+	return _firebaseFunctions.https.onRequest(app);
 };

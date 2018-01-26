@@ -18,7 +18,13 @@ export function global(app) {
 	return app.use(globalHandler);
 }
 
+export function all(app) {
+	app.use(globalHandler);
+	app.use(errorHandler);
+}
+
 export default {
 	global,
-	error
+	error,
+	all
 }

@@ -9,6 +9,7 @@ exports.sendResponse = sendResponse;
 exports.pipeResponse = pipeResponse;
 exports.getRequestData = getRequestData;
 exports.createRequestConfig = createRequestConfig;
+exports.normalizeURLToProxy = normalizeURLToProxy;
 
 var _request = require('request');
 
@@ -80,11 +81,16 @@ function createRequestConfig() {
 	}, data.config);
 }
 
+function normalizeURLToProxy(req, data) {
+	return data.url || req.path.replace(/^\//, '').replace('://', ':/').replace(':/', '://');
+}
+
 exports.default = {
 	throwError: throwError,
 	sendResponse: sendResponse,
 	pipeResponse: pipeResponse,
 	errorResponse: errorResponse,
 	getRequestData: getRequestData,
-	createRequestConfig: createRequestConfig
+	createRequestConfig: createRequestConfig,
+	normalizeURLToProxy: normalizeURLToProxy
 };

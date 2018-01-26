@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.createApp = createApp;
-exports.https = https;
+exports.route = route;
 exports.initializeAdmin = initializeAdmin;
 
 var _cors = require('cors');
@@ -31,11 +31,9 @@ var _compression = require('compression');
 
 var _compression2 = _interopRequireDefault(_compression);
 
-var _firebaseFunctions = require('firebase-functions');
-
-var _firebaseFunctions2 = _interopRequireDefault(_firebaseFunctions);
-
 var _errorHandler = require('./error-handler');
+
+var _firebaseFunctions = require('firebase-functions');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -53,45 +51,49 @@ var initializeApplication = function initializeApplication() {
 	return app;
 };
 
-var initializeRouter = function initializeRouter(route) {
-	var routes = (0, _router2.default)(route);
+var initializeRouter = function initializeRouter(prefix, routes, extras) {
+	routes = (0, _router2.default)(prefix, routes, extras);
 
 	app.use(routes);
 
 	return app;
 };
 
-function createApp(route) {
-	initializeApplication();
-
-	initializeRouter(route);
-
+var initializeErrorHandler = function initializeErrorHandler() {
 	(0, _errorHandler.global)(app);
 
 	(0, _errorHandler.error)(app);
+};
+
+function createApp(prefix, routes, extras) {
+	initializeApplication();
+
+	initializeRouter(prefix, routes, extras);
+
+	initializeErrorHandler();
 
 	return app;
 }
 
-function https(route) {
-	var app = createApp(route);
+function route(prefix, routes, extras) {
+	var app = createApp(prefix, routes, extras);
 
-	return _firebaseFunctions2.default.https.onRequest(function (req, res) {
-		console.info(route.toUpperCase() + ' Request Path:', req.path);
+	return _firebaseFunctions.https.onRequest(function (req, res) {
+		console.info(prefix.toUpperCase() + ' Request Path:', req.path);
 		return app(req, res);
 	});
 }
 
 function initializeAdmin() {
-	var config = _firebaseFunctions2.default && _firebaseFunctions2.default.config && _firebaseFunctions2.default.config().firebase;
+	var appConfig = _firebaseFunctions.config && (0, _firebaseFunctions.config)().firebase;
 
-	!_firebaseAdmin2.default.apps.length && _firebaseAdmin2.default.initializeApp(config);
+	appConfig && !_firebaseAdmin2.default.apps.length && _firebaseAdmin2.default.initializeApp(appConfig);
 
 	return _firebaseAdmin2.default;
 }
 
 exports.default = {
-	https: https,
+	route: route,
 	createApp: createApp,
 	initializeAdmin: initializeAdmin
 };

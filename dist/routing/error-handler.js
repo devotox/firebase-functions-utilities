@@ -5,6 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.error = error;
 exports.global = global;
+exports.all = all;
 var globalHandler = function globalHandler(req, res, next) {
 	var err = new Error('Not Found');
 	err.status = 404;
@@ -28,7 +29,13 @@ function global(app) {
 	return app.use(globalHandler);
 }
 
+function all(app) {
+	app.use(globalHandler);
+	app.use(errorHandler);
+}
+
 exports.default = {
 	global: global,
-	error: error
+	error: error,
+	all: all
 };

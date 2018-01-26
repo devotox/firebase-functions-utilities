@@ -10,9 +10,9 @@ import bodyParser from 'body-parser';
 
 import compression from 'compression';
 
-import functions from 'firebase-functions';
-
 import { global, error } from './error-handler';
+
+import { https, config } from 'firebase-functions';
 
 const app = express();
 
@@ -28,48 +28,51 @@ const initializeApplication = () => {
 	return app;
 };
 
-const initializeRouter = (route) => {
-	let routes = router(route);
+const initializeRouter = (prefix, routes, extras) => {
+	routes = router(prefix, routes, extras);
 
 	app.use(routes);
 
 	return app;
 };
 
-export function createApp(route) {
-	initializeApplication();
-
-	initializeRouter(route);
-
+const initializeErrorHandler = () => {
 	global(app);
 
 	error(app);
+};
+
+export function createApp(prefix, routes, extras) {
+	initializeApplication();
+
+	initializeRouter(prefix, routes, extras);
+
+	initializeErrorHandler();
 
 	return app;
 }
 
-export function https(route) {
-	let app = createApp(route);
+export function route(prefix, routes, extras) {
+	let app = createApp(prefix, routes, extras);
 
-	return functions.https.onRequest((req, res) => {
-		console.info(`${route.toUpperCase()} Request Path:`, req.path);
+	return https.onRequest((req, res) => {
+		console.info(`${prefix.toUpperCase()} Request Path:`, req.path);
 		return app(req, res);
 	});
 }
 
 export function initializeAdmin() {
-	let config = functions
-		&& functions.config
-		&& functions.config().firebase;
+	let appConfig = config && config().firebase;
 
-	!admin.apps.length
-		&& admin.initializeApp(config);
+	appConfig &&
+		!admin.apps.length
+		&& admin.initializeApp(appConfig);
 
 	return admin;
 }
 
 export default {
-	https,
+	route,
 	createApp,
 	initializeAdmin
 };

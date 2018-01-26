@@ -4,18 +4,28 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+exports.default = function (prefix, routes) {
+	var _ref = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
+	    _ref$status = _ref.status,
+	    status = _ref$status === undefined ? true : _ref$status,
+	    _ref$proxy = _ref.proxy,
+	    proxy = _ref$proxy === undefined ? false : _ref$proxy;
 
-exports.default = function (route, routes) {
-	routes = _extends({}, defaultRoutes, routes);
-	routes[route] && routes[route]();
-	routes.__status__(route);
+	createRoutes(prefix, routes);
+
+	status && statusRoute(prefix);
+	proxy && proxyRoute(prefix);
+
 	return router;
 };
 
 var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
+
+var _proxy = require('./api/proxy');
+
+var _proxy2 = _interopRequireDefault(_proxy);
 
 var _status = require('./api/status');
 
@@ -25,10 +35,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var router = new _express2.default.Router();
 
-var defaultRoutes = {
-	__status__: function __status__(route) {
-		router.use('/:' + route + '?/status', _status2.default);
-	}
+var statusRoute = function statusRoute(prefix) {
+	router.use('/:' + prefix + '?/status', _status2.default);
+};
+
+var proxyRoute = function proxyRoute(prefix) {
+	router.use('/:' + prefix + '?/proxy', _proxy2.default);
+};
+
+var createRoutes = function createRoutes(prefix, routes) {
+	var root = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : process.cwd();
+
+	routes.forEach(function (route) {
+		return router.use('/:' + prefix + '?/' + route, require(root + '/' + prefix + '/' + route));
+	});
 };
 
 ;

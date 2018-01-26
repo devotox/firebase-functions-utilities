@@ -1,16 +1,16 @@
-import fs from 'fs';
-
 import cors from 'cors';
 
 import express from 'express';
 
 import FastBoot from 'fastboot';
 
-import compression from "compression";
+import compression from 'compression';
 
 import logger from '../utilities/logger';
 
-import functions from 'firebase-functions';
+import { https } from 'firebase-functions';
+
+import { existsSync, readFileSync } from 'fs';
 
 import { errorResponse } from '../utilities/response';
 
@@ -44,7 +44,7 @@ const initializeApplication = (fastBoot, ampFile) => {
 	app.use(compression());
 	app.use(cors({ origin: true }));
 
-	app.all('*', (request, response) => {
+	app.get('*', (request, response) => {
 		let { url, path } = request;
 		logger.info('SSR Request Path:', path);
 		let html = ampFile && url.includes('?amp') ? ampFile : null;
@@ -62,8 +62,7 @@ const initializeApplication = (fastBoot, ampFile) => {
 	return app;
 };
 
-const initializeFastboot = (distPath = './dist') => {
-
+const initializeFastBoot = (distPath = `${process.cwd()}/dist`) => {
 	const fastBoot = new FastBoot({
 		distPath,
 		resilient: false,
@@ -71,17 +70,18 @@ const initializeFastboot = (distPath = './dist') => {
 		destroyAppInstanceInMs: '60000'
 	});
 
-	const ampFile = fs.readFileSync(`.${distPath}/index.amp.html`, 'utf8');
+	const ampFile = existsSync(`.${distPath}/index.amp.html`)
+		&& readFileSync(`.${distPath}/index.amp.html`, 'utf8');
 
 	return { fastBoot, ampFile };
 };
 
 
-export default function setup(distPath) {
+export default function ssr(distPath) {
 
-	let { fastBoot, ampFile } = initializeFastboot(distPath);
+	let { fastBoot, ampFile } = initializeFastBoot(distPath);
 
 	let app = initializeApplication(fastBoot, ampFile);
 
-	return functions.https.onRequest(app);
+	return https.onRequest(app);
 };
