@@ -46,8 +46,9 @@ const initializeApplication = (fastBoot, ampFile) => {
 
 	app.get('*', (request, response) => {
 		let { url, path } = request;
-		logger.info('SSR Request Path:', path);
 		let html = ampFile && url.includes('?amp') ? ampFile : null;
+
+		logger.info('SSR Request Path:', path);
 
 		fastBoot.visit(path, {
 			html,
