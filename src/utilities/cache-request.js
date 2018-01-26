@@ -1,18 +1,18 @@
 import Promise from 'bluebird';
 
-import redis from 'express-redis-cache';
-
-const deleteType = (cache, type) => deleteCachedUrls(cache, getInvalidationList(type));
-
-const deleteCachedKey = (cache, list) => (key) => cache.del(`*${list[key]}*`, logCachedError(list, key));
-
-const showError = (list, key, error) => console.error('Delete Cached URLs Error', key, list, error);
-
-const deleteCachedUrls = (cache, list) => Object.keys(list).forEach(deleteCachedKey(cache, list));
+import expressRedisCache from 'express-redis-cache';
 
 const logCachedError = (list, key) => (error) => error && showError(list, key, error);
 
+const deleteType = (cache, type) => deleteCachedUrls(cache, getInvalidationList(type));
+
+const deleteCachedUrls = (cache, list) => Object.keys(list).forEach(deleteCachedKey(cache, list));
+
 const cacheError = (error) => console.error('\n********* REDIS ERROR *********\n ', error.message);
+
+const showError = (list, key, error) => console.error('Delete Cached URLs Error', key, list, error);
+
+const deleteCachedKey = (cache, list) => (key) => cache.del(`*${list[key]}*`, logCachedError(list, key));
 
 const getInvalidationList = (type) => {
 	let invalidationList = {};
@@ -73,12 +73,14 @@ const createCache = (expiry, config) => {
 	expire['200'] = expiry ? expiry : expire['200'];
 	let conf = { ...cacheConfiguration, ...{ expire } };
 
-	let cache = redis(conf);
+	let cache = expressRedisCache(conf);
 	cache.on('error', cacheError);
 	return cache;
 };
 
-const closeCache = (cache) => Promise.delay(3000, () => cache.client.quit());
+const closeCache = (cache) => {
+	return Promise.delay(3000, () => cache.client.quit());
+};
 
 module.exports = {
 	clearCache,
