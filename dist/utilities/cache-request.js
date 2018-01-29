@@ -12,32 +12,32 @@ var _expressRedisCache2 = _interopRequireDefault(_expressRedisCache);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var deleteType = function deleteType(cache, type) {
-	return deleteCachedUrls(cache, getInvalidationList(type));
-};
-
-var deleteCachedKey = function deleteCachedKey(cache, list) {
-	return function (key) {
-		return cache.del('*' + list[key] + '*', logCachedError(list, key));
-	};
-};
-
-var showError = function showError(list, key, error) {
-	return console.error('Delete Cached URLs Error', key, list, error);
-};
-
-var deleteCachedUrls = function deleteCachedUrls(cache, list) {
-	return Object.keys(list).forEach(deleteCachedKey(cache, list));
-};
-
 var logCachedError = function logCachedError(list, key) {
 	return function (error) {
 		return error && showError(list, key, error);
 	};
 };
 
+var deleteType = function deleteType(cache, type) {
+	return deleteCachedUrls(cache, getInvalidationList(type));
+};
+
+var deleteCachedUrls = function deleteCachedUrls(cache, list) {
+	return Object.keys(list).forEach(deleteCachedKey(cache, list));
+};
+
 var cacheError = function cacheError(error) {
 	return console.error('\n********* REDIS ERROR *********\n ', error.message);
+};
+
+var showError = function showError(list, key, error) {
+	return console.error('Delete Cached URLs Error', key, list, error);
+};
+
+var deleteCachedKey = function deleteCachedKey(cache, list) {
+	return function (key) {
+		return cache.del('*' + list[key] + '*', logCachedError(list, key));
+	};
 };
 
 var getInvalidationList = function getInvalidationList(type) {

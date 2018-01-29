@@ -76,8 +76,9 @@ var initializeApplication = function initializeApplication(fastBoot, ampFile) {
 		var url = request.url,
 		    path = request.path;
 
-		_logger2.default.info('SSR Request Path:', path);
 		var html = ampFile && url.includes('?amp') ? ampFile : null;
+
+		_logger2.default.info('SSR Request Path:', path);
 
 		fastBoot.visit(path, {
 			html: html,

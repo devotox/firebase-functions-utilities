@@ -6,12 +6,14 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (prefix, routes) {
 	var _ref = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
+	    _ref$root = _ref.root,
+	    root = _ref$root === undefined ? process.cwd() : _ref$root,
 	    _ref$status = _ref.status,
 	    status = _ref$status === undefined ? true : _ref$status,
 	    _ref$proxy = _ref.proxy,
 	    proxy = _ref$proxy === undefined ? false : _ref$proxy;
 
-	createRoutes(prefix, routes);
+	createRoutes(prefix, routes, root);
 
 	status && statusRoute(prefix);
 	proxy && proxyRoute(prefix);
@@ -43,9 +45,7 @@ var proxyRoute = function proxyRoute(prefix) {
 	router.use('/:' + prefix + '?/proxy', _proxy2.default);
 };
 
-var createRoutes = function createRoutes(prefix, routes) {
-	var root = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : process.cwd();
-
+var createRoutes = function createRoutes(prefix, routes, root) {
 	routes.forEach(function (route) {
 		return router.use('/:' + prefix + '?/' + route, require(root + '/' + prefix + '/' + route));
 	});
