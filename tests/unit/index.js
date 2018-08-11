@@ -6,8 +6,6 @@ import { describe, it } from 'mocha';
 
 import index from '../../src/index';
 
-console.log(index);
-
 const exports = {
 	object: ['pg', 'firebase', 'app', 'errorHandler', 'logger', 'helpers', 'response', 'cacheRequest'],
 	function: ['ssr', 'router', 'status']
