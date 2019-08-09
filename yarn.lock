@@ -90,6 +90,11 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
+"@ember-data/rfc395-data@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@ember-data/rfc395-data/-/rfc395-data-0.0.4.tgz#ecb86efdf5d7733a76ff14ea651a1b0ed1f8a843"
+  integrity sha512-tGRdvgC9/QMQSuSuJV45xoyhI0Pzjm7A9o/MVVA3HakXIImJbbzx/k/6dO9CUEQXIyS2y0fW6C1XaYOG7rY0FQ==
+
 "@firebase/app-types@0.3.10":
   version "0.3.10"
   resolved "https://registry.yarnpkg.com/@firebase/app-types/-/app-types-0.3.10.tgz#8f6d24d80bf833622b53ed26eaa04cfa9dd0f2f3"
@@ -2347,10 +2352,11 @@ eslint-plugin-ember-suave@2.0.0-beta.1:
     requireindex "~1.2.0"
 
 eslint-plugin-ember@^6.4.1:
-  version "6.6.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-ember/-/eslint-plugin-ember-6.6.0.tgz#fa64f0e9fbbe14ae44478b5fa3890fb74d720e5e"
-  integrity sha512-vqRAyGMtuohMe+cnxiPYIF73gC2Rlei0GX/TAAAIXIJH8E98TFQkOHAhzF6u/6l6W5XRVuTKOlXyPJzRY+kJwQ==
+  version "6.8.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-ember/-/eslint-plugin-ember-6.8.2.tgz#3b512426c3d6cb29913471dedbee2c21f16fc26e"
+  integrity sha512-NXtanzQaX7p88rNK55ZlTU25MSiu8DDrdT83plgx1zQ8C8oVcX3qnnpD4SfaVfuGE1ZKmEGkelPZF8y6kU1qoA==
   dependencies:
+    "@ember-data/rfc395-data" "^0.0.4"
     ember-rfc176-data "^0.3.9"
     snake-case "^2.1.0"
 
