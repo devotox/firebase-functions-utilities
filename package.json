@@ -71,7 +71,7 @@
 		"eslint-plugin-prettier": "3.1.0",
 		"flow-bin": "0.102.0-rc",
 		"jsinspect": "0.12.7",
-		"mocha": "6.1.4",
+		"mocha": "6.2.0",
 		"prettier": "1.18.2"
 	}
 }
