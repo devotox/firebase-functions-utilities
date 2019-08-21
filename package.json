@@ -69,7 +69,7 @@
 		"eslint-plugin-ember-suave": "2.0.0-beta.1",
 		"eslint-plugin-flowtype": "3.10.3",
 		"eslint-plugin-prettier": "3.1.0",
-		"flow-bin": "0.102.0-rc",
+		"flow-bin": "0.105.2",
 		"jsinspect": "0.12.7",
 		"mocha": "6.1.4",
 		"prettier": "1.18.2"
