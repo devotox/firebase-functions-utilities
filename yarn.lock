@@ -364,17 +364,17 @@
     through2 "^3.0.0"
     xdg-basedir "^4.0.0"
 
-"@grpc/grpc-js@0.6.9":
-  version "0.6.9"
-  resolved "https://registry.yarnpkg.com/@grpc/grpc-js/-/grpc-js-0.6.9.tgz#49e0b32b92b822df294cc576df169cc6112063b4"
-  integrity sha512-r1nDOEEiYmAsVYBaS4DPPqdwPOXPw7YhVOnnpPdWhlNtKbYzPash6DqWTTza9gBiYMA5d2Wiq6HzrPqsRaP4yA==
+"@grpc/grpc-js@^0.6.12":
+  version "0.6.13"
+  resolved "https://registry.yarnpkg.com/@grpc/grpc-js/-/grpc-js-0.6.13.tgz#960c37fffb006c683382de3fdf4d8ab837829afe"
+  integrity sha512-fxkxS+sEtYdfR0ifqgCTqBe4jZ5PvlvgcaYpzwgMqz+b18uUdPmp5eRQN+qbbJg2ZMUcgItA8OWIvAobW3PDng==
   dependencies:
     semver "^6.2.0"
 
 "@grpc/proto-loader@^0.5.0", "@grpc/proto-loader@^0.5.1":
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/@grpc/proto-loader/-/proto-loader-0.5.1.tgz#48492b53cdda353110b51a4b02f465974729c76f"
-  integrity sha512-3y0FhacYAwWvyXshH18eDkUI40wT/uGio7MAegzY8lO5+wVsc19+1A7T0pPptae4kl7bdITL+0cHpnAPmryBjQ==
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/@grpc/proto-loader/-/proto-loader-0.5.3.tgz#a233070720bf7560c4d70e29e7950c72549a132c"
+  integrity sha512-8qvUtGg77G2ZT2HqdqYoM/OY97gQd/0crSG34xNmZ4ZOsv3aQT/FQV9QfZPazTGna6MIoyUd+u6AxsoZjJ/VMQ==
   dependencies:
     lodash.camelcase "^4.3.0"
     protobufjs "^6.8.6"
@@ -519,9 +519,9 @@
   integrity sha512-b8bbUOTwzIY3V5vDTY1fIJ+ePKDUBqt2hC2woVGotdQQhG/2Sh62HOKHrT7ab+VerXAcPyAiTEipPu/FsreUtg==
 
 "@types/node@^10.1.0":
-  version "10.14.16"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.14.16.tgz#4d690c96cbb7b2728afea0e260d680501b3da5cf"
-  integrity sha512-/opXIbfn0P+VLt+N8DE4l8Mn8rbhiJgabU96ZJ0p9mxOkIks5gh6RUnpHak7Yh0SFkyjO/ODbxsQQPV2bpMmyA==
+  version "10.17.6"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.17.6.tgz#1aaabd6f6470a6ac3824ab1e94d731ca1326d93d"
+  integrity sha512-0a2X6cgN3RdPBL2MIlR6Lt0KlM7fOFsutuXcdglcOq6WvLnYXgPQSh0Mx6tO1KCAE8MxbHSOSTWDoUxRq+l3DA==
 
 "@types/node@^8.0.53":
   version "8.10.49"
@@ -3030,11 +3030,11 @@ google-auth-library@^5.0.0, google-auth-library@^5.5.0:
     lru-cache "^5.0.0"
 
 google-gax@^1.7.5:
-  version "1.11.1"
-  resolved "https://registry.yarnpkg.com/google-gax/-/google-gax-1.11.1.tgz#9be67c762f25445a6d8d410207f2c6e180b3b947"
-  integrity sha512-v/APF2G5h2nS5R/1DW2vsgloaMu2/B3xjHdAptR1yUwZpEd9rxPTlhqosrjl/VRu+gWGr9JZN19ZgJTXQ/Db6Q==
+  version "1.11.2"
+  resolved "https://registry.yarnpkg.com/google-gax/-/google-gax-1.11.2.tgz#150c16b3c9dee8eab7aa454b181fa14d5fd3400d"
+  integrity sha512-NWdIenM/F/SLIaQLBP5Fxsva+vgZ38sO9KR/Vj36APQceTzAVimn7i0jYUrxBv77uov4xZzwcORzTuqp0eE4WQ==
   dependencies:
-    "@grpc/grpc-js" "0.6.9"
+    "@grpc/grpc-js" "^0.6.12"
     "@grpc/proto-loader" "^0.5.1"
     "@types/long" "^4.0.0"
     abort-controller "^3.0.0"
