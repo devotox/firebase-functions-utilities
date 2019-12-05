@@ -5593,9 +5593,9 @@ tar@^4, tar@^4.4.2:
     yallist "^3.0.3"
 
 teeny-request@^5.2.1:
-  version "5.3.1"
-  resolved "https://registry.yarnpkg.com/teeny-request/-/teeny-request-5.3.1.tgz#3a2a9a479e2d884eba814dc9c0c82b7979e69b4d"
-  integrity sha512-hnUeun3xryzv92FbrnprltcdeDfSVaGFBlFPRvKJ2fO/ioQx9N0aSUbbXSfTO+ArRXine1gSWdWFWcgfrggWXw==
+  version "5.3.2"
+  resolved "https://registry.yarnpkg.com/teeny-request/-/teeny-request-5.3.2.tgz#ab7fc0d9f7d5a1cd098b999c9e6f371f6133c28e"
+  integrity sha512-5cse2cocD8Drq0uYN7NPcQ/6qbrxH6Kp0TlNLP+Y5f0twEkGtIg0ti8HoYF2LCC2TO5IkK/I9/Xs38/rDvs5UA==
   dependencies:
     http-proxy-agent "^2.1.0"
     https-proxy-agent "^3.0.0"
