@@ -2922,9 +2922,9 @@ gaxios@^2.0.0, gaxios@^2.0.1, gaxios@^2.1.0:
     node-fetch "^2.3.0"
 
 gcp-metadata@^3.2.0:
-  version "3.2.3"
-  resolved "https://registry.yarnpkg.com/gcp-metadata/-/gcp-metadata-3.2.3.tgz#469869a7f558a29440601ae2096f69fe771cf0b9"
-  integrity sha512-6C/lE8rQY0zBsfTobc0OtNLNwQZmJ9d1uy+snawT2V0MN9V8KsbncNVZJxIrdrV5xuDRi0x0ppzBuUHzA22oAA==
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/gcp-metadata/-/gcp-metadata-3.3.0.tgz#df061f0c0da3fb274b20f4af0d955030bbc21eac"
+  integrity sha512-uO3P/aByOQmoDu5bOYBODHmD1oDCZw7/R8SYY0MdmMQSZVEmeTSxmiM1vwde+YHYSpkaQnAAMAIZuOqLvgfp/Q==
   dependencies:
     gaxios "^2.1.0"
     json-bigint "^0.3.0"
